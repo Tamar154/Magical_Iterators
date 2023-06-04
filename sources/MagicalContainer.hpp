@@ -10,7 +10,7 @@ namespace ariel
         std::vector<int> elements;
 
     public:
-        MagicalContainer() : elements() {}
+        MagicalContainer() {}
 
         void addElement(int element) { elements.push_back(element); }
         void removeElement(int element) { elements.pop_back(); }
@@ -28,9 +28,19 @@ namespace ariel
             AscendingIterator() : container(nullptr) {}
             AscendingIterator(const MagicalContainer &container) : container(&container), current(container.elements.begin()) {}
             AscendingIterator(const AscendingIterator &other) : container(other.container), current(other.current) {}
+            AscendingIterator(AscendingIterator &&other) = default;
             ~AscendingIterator() = default;
 
-            AscendingIterator &operator=(const AscendingIterator &other) { return *this; }
+            AscendingIterator &operator=(AscendingIterator &&other) = default;
+            AscendingIterator &operator=(const AscendingIterator &other)
+            {
+                if (this != &other)
+                {
+                    container = other.container;
+                    current = other.current;
+                }
+                return *this;
+            }
 
             bool operator==(const AscendingIterator &other) const { return false; };
             bool operator!=(const AscendingIterator &other) const { return false; };
@@ -59,9 +69,19 @@ namespace ariel
             SideCrossIterator() : container(nullptr) {}
             SideCrossIterator(const MagicalContainer &container) : container(&container), current(container.elements.begin()) {}
             SideCrossIterator(const SideCrossIterator &other) : container(other.container), current(other.current) {}
+            SideCrossIterator(SideCrossIterator &&other) = default;
             ~SideCrossIterator() = default;
 
-            SideCrossIterator &operator=(const SideCrossIterator &other) { return *this; }
+            SideCrossIterator &operator=(SideCrossIterator &&other) = default;
+            SideCrossIterator &operator=(const SideCrossIterator &other)
+            {
+                if (this != &other)
+                {
+                    container = other.container;
+                    current = other.current;
+                }
+                return *this;
+            }
 
             bool operator==(const SideCrossIterator &other) const { return false; };
             bool operator!=(const SideCrossIterator &other) const { return false; };
@@ -90,9 +110,19 @@ namespace ariel
             PrimeIterator() : container(nullptr) {}
             PrimeIterator(const MagicalContainer &container) : container(&container), current(container.elements.begin()) {}
             PrimeIterator(const PrimeIterator &other) : container(other.container), current(other.current) {}
+            PrimeIterator(PrimeIterator &&other) = default;
             ~PrimeIterator() = default;
 
-            PrimeIterator &operator=(const PrimeIterator &other) { return *this; }
+            PrimeIterator &operator=(PrimeIterator &&other) = default;
+            PrimeIterator &operator=(const PrimeIterator &other)
+            {
+                if (this != &other)
+                {
+                    container = other.container;
+                    current = other.current;
+                }
+                return *this;
+            }
 
             bool operator==(const PrimeIterator &other) const { return false; };
             bool operator!=(const PrimeIterator &other) const { return false; };
