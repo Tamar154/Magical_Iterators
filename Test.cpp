@@ -38,6 +38,10 @@ TEST_SUITE("Container basics")
         MagicalContainer container10(container5);
         CHECK_EQ(container10.size(), container5.size());
 
+        // Changing container5 should not affect container10
+        container5.removeElement(0);
+        CHECK_FALSE(container10.size() == container5.size());
+
         // add 5 more element to container10
         for (int i = 0; i < 5; ++i)
         {
